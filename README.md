@@ -10,6 +10,18 @@ output: 21
 
 //21 = 6 + 5 + 4 + 3 + 2 + 1
 ```
+var sum = Int()
+func recursiveSum(num: Int) -> Int {
+var nextNum = num - 1
+if num >= 0 {
+sum += num
+recursiveSum(num: nextNum)
+}
+return sum
+}
+print(recursiveSum(num: 6))
+
+
 
 
 - ### Multiply array
@@ -21,6 +33,39 @@ multArr([2, 3, 5]); // returns 30
 multArr([5, 5, 1, 2]); //returns 50
 ```
 
+var product: Int = 1
+func multArr(arr: [Int]) -> Int{
+var newArr: [Int] = arr
+if arr.count > 0 {
+product *= newArr.removeLast()
+multArr(arr: newArr)
+}
+return product
+}
+//
+multArr(arr: [5, 5, 1, 2])
+
+//QUESTION 2 (NOT A SOLUTION BUT HOW I STARTED TO APPROACH PROBLEM)
+////var sum: Int = 1
+////
+////func multArr(arr: [Int]) -> Int{
+////  let iterations: Int = arr.count
+//////  var nextIndex: Int = iterations - 1
+////  if iterations >= 0 {
+////    sum *= arr[iterations]
+////    var newArr = arr
+////    newArr.remove(at: iterations)
+////    multArr(arr: newArr)
+////  }
+////  return sum
+////}
+////
+////multArr(arr: [2, 3, 5])
+////
+
+
+
+
 - ### Concatenate array
 
 Write a function called `concatArr` that takes in an array of strings as an argument and recursively concatenates the strings together into a single string, with spaces between each original string.
@@ -29,6 +74,25 @@ Write a function called `concatArr` that takes in an array of strings as an argu
 concatArr(['is', 'it', 'tomorrow']); // returns 'is it tomorrow'
 concatArr(['or', 'just', 'the', 'end', 'of', 'time']); //returns 'or just the end of time'
 ```
+
+
+var concatenated: String = ""
+func concatArr(arr: [String]) -> String{
+var newArr: [String] = arr
+if arr.count > 0 {
+concatenated += newArr.removeFirst() + " "
+concatArr(arr: newArr)
+}
+return concatenated
+}
+
+concatArr(arr: ["is", "it", "tomorrow"])
+
+
+
+
+
+
 
 - ### Sum evens
 
@@ -39,6 +103,26 @@ sumEvens([2, 3, 5, 6]); // returns 8
 sumEvens([10, 5, 1, 2, 12]); //returns 24
 ```
 
+
+var sum: Int = 0
+
+func sumEvens(arr: [Int]) -> Int{
+var newArr = arr.filter({$0 % 2 == 0})
+if newArr.count > 0 {
+sum += newArr.removeLast()
+sumEvens(arr: newArr)
+}
+return sum
+}
+
+sumEvens(arr: [10, 5, 1, 2, 12])
+
+
+
+
+
+
+
 - ### Recursive range
 
 Write a function called `range` which takes in two numbers (num1, num2) as arguments. The function should return an array of numbers between num1 and num2.
@@ -47,6 +131,36 @@ Write a function called `range` which takes in two numbers (num1, num2) as argum
 range(2,10); // returns [2, 3, 4, 5, 6,7, 8, 9, 10]
 range(17,20); // returns [17, 18, 19, 20]
 ```
+
+var numsBetween = [Int]()
+
+
+func range(num1: Int, num2: Int) -> [Int] {
+var startNum = Int()
+var endNum = Int()
+
+if num1 <= num2 {
+startNum = num1
+endNum = num2
+numsBetween.append(startNum)
+startNum += 1
+range(num1: startNum, num2: endNum)
+//  } else {
+//    if num1 >= num2 {
+//    startNum = num2
+//    endNum = num1
+//    numsBetween.append(startNum)
+//    startNum += 1
+//    range(num1: startNum, num2: endNum)
+//  }
+}
+return(numsBetween)
+}
+
+print(range(num1: 2, num2: 10))
+
+
+
 
 
 - ### Triple Step
